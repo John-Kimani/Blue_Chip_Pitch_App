@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
-from app import app
-from app.forms import LoginForm
+from app import app,db
+from app.forms import LoginForm, SignupForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 
@@ -48,6 +48,31 @@ def login():
         return redirect(url_for('index'))
     title = "LogIn"
     return render_template('login.html', title=title, form=form )
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    '''
+    Function that handles registration page
+    '''
+    if current_user.is_authenticated:
+        '''
+        Logic that handles user approval
+        '''
+        return redirect(url_for('index'))
+    form = SignupForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data, password_hash=form.password.data)
+        '''
+        Condition that creates a new user variable and add user to database
+        Returns:
+            Successful new users to login
+        '''
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulatons you are now a registered user')
+        return redirect('login')
+    return render_template('signup.html', title="Register", form=form)
+
 
 @app.route('/logout')
 def logout():
