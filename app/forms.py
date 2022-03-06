@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from app.models import User
 
 class LoginForm(FlaskForm):
     '''
@@ -20,3 +21,11 @@ class SignupForm(FlaskForm):
     password = PasswordField('password', validators=[DataRequired()])
     confirm_password = PasswordField('confirm password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField()
+
+    def valid_username(self, username):
+        '''
+        Functions that checks and confirm a unique username to be approved
+        '''
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username')
