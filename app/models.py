@@ -1,5 +1,6 @@
 from datetime import datetime
 from app import db
+from werkzeug.security import generate_password_hash,check_password_hash
 
 
 class User(db.Model):
@@ -17,7 +18,29 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
 
     def __repr__(self):
+        '''
+        Function that prints out user information
+        '''
         return '<User {}>'.format(self.username)
+
+    def set_password(self, password):
+        '''
+        Function that create a user password
+        Args: password
+        Retruns:
+            encrypted password to be save in database
+        '''
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        '''
+        Function to check user password aganist the stored hash password
+        Args:
+            User password
+        Returns:
+            Confirm user password(more of a boolean)
+        '''
+        return check_password_hash(self.password_hash, password)
 
 class Pitch(db.Model):
     '''
