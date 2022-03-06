@@ -1,9 +1,17 @@
 from datetime import datetime
-from app import db
+from app import db, login
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
 
 
-class User(db.Model):
+@login.user_loader
+def load_user(id):
+    '''
+    Function that handles logged in users in each user session
+    '''
+    return User.query.get(int(id))
+
+class User(UserMixin, db.Model):
     '''
     Class that define user instance with its attributes
     Args:
