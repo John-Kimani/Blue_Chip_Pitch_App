@@ -16,7 +16,7 @@ class SignupForm(FlaskForm):
     '''
     Class that handles user registration
     '''
-    username = StringField('username', validators=[DataRequired,  Length(1, 10)])
+    username = StringField('username', validators=[DataRequired(),  Length(1, 10)])
     email = StringField('email', validators=[DataRequired(), Length(1,64), Email()])
     password = PasswordField('password', validators=[DataRequired()])
     confirm_password = PasswordField('confirm password', validators=[DataRequired(), EqualTo('password')])

@@ -21,7 +21,7 @@ def login():
     View function that set display on login page
     current user from flask login is a preventive measure for a user in session to double log in
     '''
-    if current_user.is_authenicated:
+    if current_user.is_authenticated:
         '''
         Redirects logged in user to home page
         '''
