@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app.models import User
 
 
@@ -18,6 +18,7 @@ def index():
 def login():
     '''
     View function that set display on login page
+    current user from flask login is a preventive measure for a user in session to double log in
     '''
     if current_user.is_authenicated:
         '''
@@ -36,7 +37,7 @@ def login():
             '''
             Condition to handle invalid user input
             Returns:
-                Invalid response retains user on login page 
+                Invalid response retains user on login page to enable them try again
                 Valid reponse redirects user to the authorized home page
             '''
             flash('Invalid username or password')
@@ -46,3 +47,13 @@ def login():
         return redirect(url_for('index'))
     title = "LogIn"
     return render_template('login.html', title=title, form=form )
+
+@app.route('/logout')
+def logout():
+    '''
+    Function that handles logout
+    Returns:
+        Log out user to login page
+    '''
+    logout_user()
+    return redirect(url_for('login'))
