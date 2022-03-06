@@ -41,26 +41,27 @@
     </nav>
 {% endblock %}
 
-<!-- flash message -->
-{% block flash_message %}
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    {% endwith %}
-{% endblock %}
 
 
 <!-- Content goes here -->
 {% block content %}
     <div class="container">
+        <!-- flash message -->
+        {% block flash_message %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <hr>
+        {% endwith %}
+        {% endblock %}
+
         {% block app_context %}
-        
+        <!-- app contexts -->
         {% endblock %}
     </div>
 {% endblock %}
