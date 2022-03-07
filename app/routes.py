@@ -67,6 +67,7 @@ def signup():
         Returns:
             Successful new users to login
         '''
+        user.set_password(form.password.data) #handles password hashing
         db.session.add(user)
         db.session.commit()
         flash('Congratulatons you are now a registered user')
