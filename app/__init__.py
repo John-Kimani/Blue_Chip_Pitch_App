@@ -17,6 +17,9 @@ login.login_view = 'login'
 # register error blueprint
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
+# register auth blueprint
+from app.auth import bp as auth_bp
+app.register_blueprint(auth_bp)
 
 
 from app import routes, errors, models
