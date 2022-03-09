@@ -20,6 +20,8 @@ class User(UserMixin, db.Model):
         Instances are created as instances of the db.column
         __repr__ method tells python how to print objects of this class
     '''
+    __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -60,6 +62,8 @@ class Pitch(db.Model):
     Returns:
         Users timestamp as at the time they created pitch messages
     '''
+    __tablename__ = 'pitch'
+    
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

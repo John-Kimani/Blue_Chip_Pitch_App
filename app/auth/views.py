@@ -16,7 +16,7 @@ def login():
         '''
         Redirects logged in user to home page
         '''
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         '''
@@ -33,10 +33,10 @@ def login():
                 Valid reponse redirects user to the authorized home page
             '''
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         flash('You are logged in succesfully')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     title = "LogIn"
     return render_template('auth/login.html', title=title, form=form )
 
@@ -49,7 +49,7 @@ def signup():
         '''
         Logic that handles user approval
         '''
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = SignupForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data, password_hash=form.password.data)
@@ -74,4 +74,4 @@ def logout():
         Log out user to login page
     '''
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('main.index'))

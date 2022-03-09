@@ -1,17 +1,26 @@
 from flask import redirect, render_template, url_for
 from app.main import bp
-# from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import login_required
+from app import db
+
+from app.models import Pitch
 
 
 @bp.route('/')
 @bp.route('/index')
-# @login_required
+@login_required
 def index():
     '''
     View function that set display on home page
     '''
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('index'))
-
     title = "HOME"
-    return render_template('index.html', title=title)
+    pitch= Pitch()
+    db.session.add(pitch)
+    db.session.commit()
+    print('*'*30)
+    print(pitch)
+
+    all_pitch = Pitch.query.all()
+    print('*'*30)
+    print(all_pitch)
+    return render_template('index.html', title=title, allpitch=all_pitch)
