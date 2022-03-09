@@ -1,46 +1,36 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title %}
-    {% if title %}
-        {{ title }} - BlueChip
-    {% else %}
-    <title> Welcome to Blue Chip </title>
-    {% endif %}
-{% endblock %}
 
 {% block app_context %}
     <div class="row">
         <div class="col-md-12">
-            <h1>Hello, {{ current_user.username }} !</h1>
+            <h1 class="text-center">Hello, {{ current_user.username }} !</h1>
             <p>{{ body }}</p>
         </div>
     </div>
     <hr>
     <div class="row">
-        <h2>List of Pitches</h2>
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <h2 class="text-center">List of Pitches</h2>
             <div class="card">
                 {% for pitch in all_pitches %}
-                <div class="card-body">
-                    <h5 class="card-title">User</h5>
-                    <p class="card-text"> {{ pitch }} </p>
-                    <a href="#" class="btn btn-primary">Comment</a>
-                    </div>
-                </div>
-              {% endfor %}
+                    {% include '_pitches.html' %}
+                {% endfor %}
         </div>
     </div>
-    <div class="row container">
-        <div class="col-md-3">
-            <!-- empty div -->
+    <div class="row">
+        <div class="col-md-2">
+            <!-- empty -->
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
+            <h4 class="text-center">Create Pitch</h4>
             {{ wtf.quick_form(form) }}
         </div>
         <div class="col-md-2">
-            <!-- empty div -->
+            <!-- empty -->
         </div>
     </div>
+
 
 {% endblock %}

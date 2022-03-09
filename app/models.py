@@ -2,6 +2,7 @@ from datetime import datetime
 from app import db, login
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 
 @login.user_loader
@@ -53,6 +54,10 @@ class User(UserMixin, db.Model):
         '''
         return check_password_hash(self.password_hash, password)
 
+    def avatar(self, size):
+        picture = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(picture, size)
+
 class Pitch(db.Model):
     '''
     Class that defines pitch instance made by users
@@ -69,9 +74,6 @@ class Pitch(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) #reference user id
     
-    # def save_pitch(self):
-    #     db.session.add(self)
-    #     db.session.commit()
 
     def __repr__(self):
         '''
