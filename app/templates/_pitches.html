@@ -1,7 +1,7 @@
 <div class="card-body">
     <h5 class="card-title">{{ pitch.author.username}}  <span>Posted: {{ moment(pitch.timestamp).fromNow() }}</span></h5>
     <a href="#">
-        <img src=" {{ 'url_for(pitch.author.avatar(30)) '}} " alt="">
+        <img src=" {{ pitch.author.avatar(30) }} " alt="">
     </a>
     <p class="card-text"> {{ pitch.body }} </p>
 
