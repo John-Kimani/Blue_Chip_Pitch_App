@@ -1,0 +1,5 @@
+.profile{
+    background: rgb(71,101,251);
+    background: linear-gradient(90deg, rgba(71,101,251,1) 1%, rgba(0,0,0,1) 50%, rgba(71,101,251,1) 96%);
+    color: white;
+}
