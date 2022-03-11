@@ -15,15 +15,18 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center">List of Pitches</h2>
+    <!-- pitches -->
+    <div class="row pitch">
+        <h2 class="text-center">List of Pitches</h2>
+        <div class="col-md-6">
             <div class="card">
                 {% for pitch in all_pitches %}
                     {% include '_pitches.html' %}
                 {% endfor %}
+            </div>
         </div>
     </div>
+    <!-- form starts below -->
     <div class="row">
         <div class="col-md-2">
             <!-- empty -->
