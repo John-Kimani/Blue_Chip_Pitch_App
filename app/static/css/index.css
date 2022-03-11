@@ -13,3 +13,7 @@
     background: linear-gradient(90deg, #4765fb 1%, rgba(0,0,0,1) 50%, rgba(71,101,251,1) 96%);
     color: white;
 }
+.back{
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, #4765fb 50%, rgba(0,0,0,1) 100%);
+}
